@@ -11,7 +11,7 @@ type Context struct {
 
 type HbsContext map[string]interface{}
 
-func (c Context) view(view string,ctx HbsContext) {
+func (c Context) View(view string,ctx HbsContext) {
   c.context.Header("Content-Type","text/html")
   cwd,_ := os.Getwd()
   file,err := os.ReadFile(cwd+"/"+view+".hbs")
