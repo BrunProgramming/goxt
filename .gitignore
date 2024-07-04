@@ -23,5 +23,6 @@ go.work.sum
 
 # env file
 .env
-# hbs files
-*.hbs
+
+views
+views/*

@@ -24,25 +24,26 @@ import (
 
 func main() {
   router := goxt.NewRouter()
-  router.Get("/",func(c goxt.Context) { 
-    c.view("test",goxt.HbsContext{
-      "title":"Test",
-    })
+  router.Get("/:name",func(c goxt.Ctx) {
+    name := c.Param("name")
+    c.View("test",goxt.HbsCtx{
+      "name":name,
+    },nil/*this is parameter is for you want to change the default views dir put nil if you want to use the default dir*/)
   })
   fmt.Println("Server listening in http://localhost:8080")
   router.Run(":8080")
 }
 ```
 
-test.hbs
+views/test.hbs
 ```hbs
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{title}}</title>
+    <title>Goxt the best framework buffalo is noob</title>
   </head>
   <body>
-   <h1>{{title}}</h1>
+   <h1>Hello {{name}}</h1>
   </body>
 </html>
 ```

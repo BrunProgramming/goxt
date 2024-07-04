@@ -1,19 +1,19 @@
 package goxt
 
-import ( 
+import (
   "testing"
-  "fmt" 
+  "fmt"
 )
 
-func TestHelloWorld(t *testing.T) {
+func TestHelloByParam(t *testing.T) {
   router := NewRouter()
-  router.Get("/",func(c Context) { 
-    c.view("test",HbsContext{
-      // the handlebars file is not submit into the repository if you wanna testing you need to create the test.hbs file
-      "title":"Test",
-    })
-})
+  router.Get("/:name",func(c Ctx) {
+    name := c.Param("name")
+    c.View("test",HbsCtx{
+      "name":name,
+    },""/*this is parameter is for you want to change the default views dir put "" if you want to use the default dir*/)
+  })
   fmt.Println("Server listening in http://localhost:8080")
   router.Run(":8080")
-} 
+}
 
