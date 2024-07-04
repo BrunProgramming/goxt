@@ -1,8 +1,8 @@
 <h1 style="text-align">
-    Goxt a laravel inspired framework written in [golang](https://golang.org)
-    Very thanks to gin-tonic and aymerick but without his module Gin for the http and raymond for the template parsing this project was not possible
+    Goxt a laravel inspired framework written in <a href="https://go.dev">Golang</a>
+    <br>Very thanks to gin-tonic and aymerick I use gin for the http and raymond for the template parsing without his modules create this project was not possible
 </h1>
-<hr>
+
 ## Quick start
 
 install 
@@ -12,6 +12,8 @@ install
     $ go get github.com/BrunProgramming/goxt
 
 This is a example for a basic use
+
+main.go
 ```go
 package main
 
@@ -31,3 +33,17 @@ func main() {
   router.Run(":8080")
 }
 ```
+
+test.hbs
+```hbs
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+   <h1>{{title}}</h1>
+  </body>
+</html>
+```
+

@@ -9,6 +9,7 @@ func TestHelloWorld(t *testing.T) {
   router := NewRouter()
   router.Get("/",func(c Context) { 
     c.view("test",HbsContext{
+      // the handlebars file is not submit into the repository if you wanna testing you need to create the test.hbs file
       "title":"Test",
     })
 })
