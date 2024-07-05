@@ -12,7 +12,7 @@ type Ctx struct {
 
 type HbsCtx map[string]interface{}
 
-func (c Ctx) View(view string,ctx HbsCtx,viewDir string) {
+func (c Ctx) View(view string,ctx interface{},viewDir string) {
   var dir string
   cwd,_ := os.Getwd()
   if viewDir == "" { dir=cwd+"/views/"+view+".hbs" } else { dir=viewDir }
@@ -27,6 +27,22 @@ func (c Ctx) View(view string,ctx HbsCtx,viewDir string) {
 
 func (c Ctx) Param(key string) string {
   return c.context.Param(key)
+}
+
+func (c Ctx) Query(key string, defaultValue string) string {
+  return c.context.DefaultQuery(key,defaultValue)
+}
+
+func (c Ctx) Set(key string, value string) {
+  c.context.Set(key,value)
+}
+
+func (c Ctx) Get(key string) any {
+  return c.context.MustGet(key)
+}
+// support for gin middleware nah is only a excuse because i dont make a form of creating middlewares with my Handler 
+func(c Ctx) Use(middleware ...func(*gin.Context)) {
+  c.context.Use(...middleware)
 }
 
 func TransformContext(c *gin.Context) Ctx {

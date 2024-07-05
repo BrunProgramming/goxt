@@ -1,8 +1,8 @@
 <h1 style="text-align">
     Goxt a laravel inspired framework written in <a href="https://go.dev">Golang</a>
-    <br>Very thanks to gin-tonic and aymerick I use gin for the http and raymond for the template parsing without his modules create this project was not possible
 </h1>
 
+## Very thanks to gin-gonic and aymerick I use gin for the http and raymond for the template parsing without his modules create this project was not possible
 ## Quick start
 
 install 
@@ -28,7 +28,7 @@ func main() {
     name := c.Param("name")
     c.View("test",goxt.HbsCtx{
       "name":name,
-    },nil/*this is parameter is for you want to change the default views dir put nil if you want to use the default dir*/)
+    },""/*this is parameter is for you want to change the default views dir put "" if you want to use the default dir*/)
   })
   fmt.Println("Server listening in http://localhost:8080")
   router.Run(":8080")
@@ -47,4 +47,5 @@ views/test.hbs
   </body>
 </html>
 ```
+
 
