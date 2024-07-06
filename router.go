@@ -2,47 +2,73 @@ package goxt
 
 import (
   "github.com/gin-gonic/gin"
+  
+  "os/exec"
+  "runtime"
 )
+
+func open(url string) error {
+    var cmd string
+    var args []string
+
+    switch runtime.GOOS {
+    case "windows":
+        cmd = "cmd.exe"
+        args = []string{"/c","start"}
+    case "darwin":
+        cmd = "open"
+    default: // "linux", "freebsd", "openbsd", "netbsd"
+        cmd = "xdg-open"
+    }
+    args = append(args, url)
+    return exec.Command(cmd, args...).Run()
+}
+
 type Router struct {
-  router *gin.Engine
+  Router *gin.Engine
 }
 
 func (r Router) Get(path string, listener func(Ctx)) {
-  r.router.GET(path,func(c *gin.Context){
+  r.Router.GET(path,func(c *gin.Context){
     u := TransformContext(c)
     listener(u)
   })
 }
 
 func (r Router) Post(path string, listener func(Ctx)) {
-  r.router.POST(path,func(c *gin.Context){
+  r.Router.POST(path,func(c *gin.Context){
     u := TransformContext(c)
     listener(u)
   })
 }
 
 func (r Router) Put(path string, listener func(Ctx)) {
-  r.router.PUT(path,func(c *gin.Context){
+  r.Router.PUT(path,func(c *gin.Context){
     u := TransformContext(c)
     listener(u)
   })
 }
 
 func (r Router) Delete(path string, listener func(Ctx)) {
-  r.router.DELETE(path,func(c *gin.Context){
+  r.Router.DELETE(path,func(c *gin.Context){
     u := TransformContext(c)
     listener(u)
   })
 }
 
+func(r Router) Use(middleware ...gin.HandlerFunc) {
+  r.Router.Use(middleware...)
+}
+
 func (r Router) Run(addr string) {
-  r.router.Run(addr)
+  go open("http://localhost"+addr)
+  r.Router.Run(addr)
 }
 
 func NewRouter() Router {
-  router := gin.Default()
+  router := gin.New()
   return Router{
-    router:router,
+    Router:router,
   }
 }
 

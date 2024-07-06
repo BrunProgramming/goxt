@@ -23,19 +23,50 @@ import (
 )
 
 func main() {
-  router := goxt.NewRouter()
-  router.Get("/:name",func(c goxt.Ctx) {
-    name := c.Param("name")
-    c.View("test",goxt.HbsCtx{
-      "name":name,
-    },""/*this is parameter is for you want to change the default views dir put "" if you want to use the default dir*/)
-  })
-  fmt.Println("Server listening in http://localhost:8080")
-  router.Run(":8080")
+    router := goxt.NewRouter()
+    router.Get("/",func(c goxt.Ctx) {
+        c.View("main",goxt.HbsCtx{},"")
+    })
+    router.Get("/:name",func(c goxt.Ctx) {
+        name := c.Param("name")
+        c.View("hello",goxt.HbsCtx{
+            "name":name,
+        },""/*this is parameter is for you want to change the default views dir put "" if you want to use the default dir*/)
+    })
+    fmt.Println("Server listening in http://localhost:8080")
+    router.Run(":8080")
 }
 ```
 
-views/test.hbs
+views/main.hbs
+```hbs
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Goxt the best framework buffalo is noob</title>
+  </head>
+  <body>
+   <h1>Plis enter your name below:</h1>
+   <form id="form">
+      <input type="text" id="input">
+   </form>
+    <script type="module">
+      //midutrick copyright midudev©
+      const $ = selector => document.querySelector(selector)
+      
+      $("#form").addEventListener("submit",e => {
+        e.preventDefault()
+        const value = $("#input").value
+        history.pushState("",{},`${location.href}${value}`)
+        location.reload()
+      })
+    </script>
+  </body>
+</html>
+```
+
+
+views/hello.hbs
 ```hbs
 <!DOCTYPE html>
 <html>

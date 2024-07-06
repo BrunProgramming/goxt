@@ -40,10 +40,7 @@ func (c Ctx) Set(key string, value string) {
 func (c Ctx) Get(key string) any {
   return c.context.MustGet(key)
 }
-// support for gin middleware nah is only a excuse because i dont make a form of creating middlewares with my Handler 
-func(c Ctx) Use(middleware ...func(*gin.Context)) {
-  c.context.Use(...middleware)
-}
+// support for gin middleware nah is only a excuse because i dont make a form of creating middlewares with my Handler
 
 func TransformContext(c *gin.Context) Ctx {
   return Ctx{
