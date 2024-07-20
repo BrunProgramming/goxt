@@ -5,14 +5,16 @@
 ## Very thanks to gin-gonic and aymerick I use gin for the http and raymond for the template parsing without his modules create this project was not possible
 ## Quick start
 
-install 
-> [!IMPORTANT]
-> finally the project genereator es ready
-> in the next update i remove this warning 
+Create your first goxt project
+    $ go install github.com/BrunProgramming/goxtgen
 
-    $ go get github.com/BrunProgramming/goxt
+only exec
+$ goxtgen -name my-first-goxt-project -repo my-repo
+and follow the instructions of the cli and happy coding
 
-This is a example for a basic use
+
+if you want to use the code without the project generator 
+here is a basic example:
 
 main.go
 ```go
