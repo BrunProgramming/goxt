@@ -7,7 +7,8 @@
 
 install 
 > [!IMPORTANT]
-> the module is in diapers in the future was a project generator but in the present you use the module like any other http module for golang
+> finally the project genereator es ready
+> in the next update i remove this warning 
 
     $ go get github.com/BrunProgramming/goxt
 
@@ -24,6 +25,7 @@ import (
 
 func main() {
     router := goxt.NewRouter()
+    router.Static("/style","./style")
     router.Get("/",func(c goxt.Ctx) {
         c.View("main",goxt.HbsCtx{},"")
     })

@@ -16,6 +16,8 @@ func TestHelloByParam(t *testing.T) {
 		Addr:    ":8080",
 		Handler: router.Router,
 	}
+  router.Static("/style","style")
+
   router.Get("/",func(c Ctx) {
     c.View("main",HbsCtx{},"")
   })

@@ -4,13 +4,33 @@ import (
   "github.com/gin-gonic/gin"
   "github.com/aymerick/raymond"
   "os"
+  "strings"
 )
 
 type Ctx struct {
   context *gin.Context
 }
 
+type Handler func(*Ctx)
 type HbsCtx map[string]interface{}
+
+func (c Ctx) SendFile(file string) {
+  if strings.Contains(file,"html") { 
+    c.context.Header("Content-Type", "text/html") 
+  } else {
+    c.context.Header("Content-Type", "text/plain") 
+  }
+  if strings.Contains(file,"json") {
+    c.context.Header("Content-Type", "application/json")
+  } else {
+    c.context.Header("Content-Type", "text/plain")
+  }
+  content,err := os.ReadFile(file)
+  if err != nil {
+    c.context.String(500,err.Error())
+  }
+  c.context.String(200,string(content))
+}
 
 func (c Ctx) View(view string,ctx interface{},viewDir string) {
   var dir string
@@ -40,7 +60,6 @@ func (c Ctx) Set(key string, value string) {
 func (c Ctx) Get(key string) any {
   return c.context.MustGet(key)
 }
-// support for gin middleware nah is only a excuse because i dont make a form of creating middlewares with my Handler
 
 func TransformContext(c *gin.Context) Ctx {
   return Ctx{
