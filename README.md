@@ -6,10 +6,13 @@
 ## Quick start
 
 Create your first goxt project
-    $ go install github.com/BrunProgramming/goxtgen
+
+$ go install github.com/BrunProgramming/goxtgen
 
 only exec
+
 $ goxtgen -name my-first-goxt-project -repo my-repo
+
 and follow the instructions of the cli and happy coding
 
 
